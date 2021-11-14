@@ -9,6 +9,7 @@
 namespace node_webrtc {
 
 class I420ImageData;
+class YUY2ImageData;
 class RgbaImageData;
 
 class ImageData {
@@ -22,6 +23,7 @@ class ImageData {
   }
 
   Validation<I420ImageData> toI420() const;
+  Validation<YUY2ImageData> toYuy2() const;
   Validation<RgbaImageData> toRgba() const;
 };
 
@@ -76,6 +78,34 @@ class I420ImageData {
 
   ImageData data;
 };
+ 
+class YUY2ImageData {
+ public:
+  YUY2ImageData() = default;
+
+  static Validation<YUY2ImageData> Create(ImageData imageData);
+
+  uint8_t* dataYuy2() {
+    return static_cast<uint8_t*>(data.contents.Data());
+  }
+
+  int strideYuy2() const {
+    return width() * 2;
+  }
+
+  int width() const {
+    return data.width;
+  }
+
+  int height() const {
+    return data.height;
+  }
+
+ private:
+  explicit YUY2ImageData(const ImageData data): data(data) {}
+
+  ImageData data;
+};
 
 class RgbaImageData {
  public:
@@ -106,6 +136,7 @@ class RgbaImageData {
 };
 
 DECLARE_FROM_NAPI(I420ImageData)
+DECLARE_FROM_NAPI(YUY2ImageData)
 DECLARE_FROM_NAPI(RgbaImageData)
 
 }  // namespace node_webrtc

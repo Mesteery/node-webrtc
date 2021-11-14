@@ -17,6 +17,7 @@ class I420Helpers {
 
  private:
   static Napi::Value I420ToRgba(const Napi::CallbackInfo&);
+  static Napi::Value YUY2ToRgba(const Napi::CallbackInfo&);
   static Napi::Value RgbaToI420(const Napi::CallbackInfo&);
 };
 

@@ -27,6 +27,13 @@ CONVERTER_IMPL(ImageData, I420ImageData, imageData) {
 }
 
 CONVERT_VIA(Napi::Value, ImageData, I420ImageData)
+  
+DECLARE_CONVERTER(ImageData, YUY2ImageData)
+CONVERTER_IMPL(ImageData, YUY2ImageData, imageData) {
+  return imageData.toYuy2();
+}
+  
+CONVERT_VIA(Napi::Value, ImageData, YUY2ImageData)
 
 DECLARE_CONVERTER(ImageData, RgbaImageData)
 CONVERTER_IMPL(ImageData, RgbaImageData, imageData) {
